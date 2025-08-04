@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人设定位 - Toby/嬋娟</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pink: {
+                            light: '#FFD1DC',
+                            DEFAULT: '#FFB6C1',
+                            dark: '#FF69B4'
+                        },
+                        purple: {
+                            light: '#E6E6FA',
+                            DEFAULT: '#8A2BE2',
+                            dark: '#6A0DAD'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .gradient-bg {
+                background: linear-gradient(135deg, #8A2BE2 0%, #6A0DAD 100%);
+            }
+            .feature-card {
+                transition: all 0.3s ease;
+            }
+            .feature-card:hover {
+                transform: scale(1.03);
+            }
+        }
+    </style>
+</head>
+<body class="bg-purple-light min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="gradient-bg text-white shadow-lg fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-glass text-2xl text-pink-light"></i>
+                <span class="text-xl font-bold">Toby/嬋娟</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-pink-light transition-colors">首页</a>
+                <a href="personality.html" class="hover:text-pink-light transition-colors">个人特质</a>
+                <a href="career.html" class="hover:text-pink-light transition-colors">职业背景</a>
+                <a href="persona.html" class="hover:text-pink-light transition-colors border-b-2 border-pink">人设定位</a>
+                <a href="scripts.html" class="hover:text-pink-light transition-colors">抖音剧本</a>
+                <a href="tags.html" class="hover:text-pink-light transition-colors">人物标签</a>
+            </div>
+            <button class="md:hidden text-white focus:outline-none" id="menuToggle">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-purple-dark py-4 px-4 shadow-inner">
+            <div class="flex flex-col space-y-3">
+                <a href="index.html" class="hover:text-pink-light transition-colors">首页</a>
+                <a href="personality.html" class="hover:text-pink-light transition-colors">个人特质</a>
+                <a href="career.html" class="hover:text-pink-light transition-colors">职业背景</a>
+                <a href="persona.html" class="hover:text-pink-light transition-colors">人设定位</a>
+                <a href="scripts.html" class="hover:text-pink-light transition-colors">抖音剧本</a>
+                <a href="tags.html" class="hover:text-pink-light transition-colors">人物标签</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部横幅 -->
+    <header class="pt-24 pb-16 gradient-bg text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div>
+                    <h1 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-2">人设定位</h1>
+                    <p class="opacity-90">Toby/嬋娟的个人形象与核心资讯</p>
+                </div>
+                <a href="index.html" class="mt-6 md:mt-0 bg-white text-purple px-6 py-2 rounded-full font-medium hover:bg-pink-light hover:text-white transition-all shadow-md flex items-center">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回首页
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <!-- 核心人设 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-12">
+                <div class="md:flex">
+                    <div class="md:w-1/3 bg-purple-light p-8 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="w-32 h-32 bg-pink rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i class="fa fa-user text-white text-5xl"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-purple-dark">核心人设</h2>
+                            <p class="mt-2 text-purple">懂品质、有温度的健康白酒生活家</p>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 p-8">
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            作为零售营运总经理，Toby/嬋娟既懂产品品质的"硬核标准"（如央企合作的品控流程），又能用生活化语言拆解"健康白酒"的价值；性格外向亲和，擅长在家庭聚餐、朋友小酌等场景中自然植入产品，用"真实体验+专业解读"打破"白酒=不健康"的固有认知。
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            她不只是一个产品推广者，更是35-70岁受众"选健康白酒时第一个想起的朋友"，用真诚和专业为他们提供有价值的饮酒选择建议，让他们既能享受白酒的风味，又能兼顾健康需求。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 人设偏好 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-purple-dark mb-4 flex items-center">
+                        <i class="fa fa-heart text-pink mr-2"></i> 人设偏好
+                    </h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-purple mt-1 mr-2"></i>
+                            <span>拒绝"硬广式推销"，以"生活场景化分享"传递信息</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-purple mt-1 mr-2"></i>
+                            <span>突出"亲和力"，以朋友身份与受众交流，拉近距离</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-purple mt-1 mr-2"></i>
+                            <span>强化"可靠感"，用专业背景和真实体验增强信任</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-purple mt-1 mr-2"></i>
+                            <span>注重"真实感"，不刻意塑造完美形象，展现真实自我</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-purple mt-1 mr-2"></i>
+                            <span>强调"同理心"，站在受众角度思考问题，理解他们的需求</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 核心资讯 -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-purple-dark mb-4 flex items-center">
+                        <i class="fa fa-info-circle text-pink mr-2"></i> 核心资讯
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-purple mb-1">产品锚点</h4>
+                            <p class="text-gray-600 text-sm">
+                                强调"健康配方"（针对"爱健康"需求）、"央企背书"（强化信任）、"中式白酒风味"（满足传统喜好）
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-purple mb-1">IP目标</h4>
+                            <p class="text-gray-600 text-sm">
+                                成为"健康白酒领域的靠谱分享者"，让观众看到IP就联想到"放心"、"专业"
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-purple mb-1">情感连接</h4>
+                            <p class="text-gray-600 text-sm">
+                                用"我懂你的顾虑"替代"听我的推荐"，降低受众心理防线，建立情感共鸣
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-purple mb-1">目标受众</h4>
+                            <p class="text-gray-600 text-sm">
+                                35-70岁的男女、喜欢更高品质的享受、爱健康的同时也喜爱喝中式白酒的人群
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 人设亮点 -->
+            <div>
+                <h3 class="text-2xl font-bold text-purple-dark mb-6 text-center">人设亮点与优势</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-xl shadow-md p-6 feature-card">
+                        <div class="bg-pink-light w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-balance-scale text-purple-dark"></i>
+                        </div>
+                        <h4 class="font-bold text-purple-dark mb-2">专业与生活的平衡</h4>
+                        <p class="text-gray-600 text-sm">
+                            既能用零售专业知识解读产品品质，又能用生活化语言让普通消费者理解，架起专业与生活的桥梁。
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md p-6 feature-card">
+                        <div class="bg-pink-light w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-handshake-o text-purple-dark"></i>
+                        </div>
+                        <h4 class="font-bold text-purple-dark mb-2">信任度高</h4>
+                        <p class="text-gray-600 text-sm">
+                            诚信为本的价值观与央企产品背书形成呼应，加上真实不做作的表达，容易获得目标受众的信任。
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-md p-6 feature-card">
+                        <div class="bg-pink-light w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-users text-purple-dark"></i>
+                        </div>
+                        <h4 class="font-bold text-purple-dark mb-2">受众共鸣强</h4>
+                        <p class="text-gray-600 text-sm">
+                            突出的共情力能够精准把握35-70岁受众的心理，用他们熟悉的场景和语言进行沟通，共鸣感强。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-purple-dark text-white py-10 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa fa-glass text-pink text-2xl"></i>
+                        <span class="text-xl font-bold">Toby/嬋娟</span>
+                    </div>
+                    <p class="mt-2 text-pink-light opacity-80">健康白酒生活家</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>© 2025 澳门中健昊天</p>
+                    <p class="text-sm mt-1 opacity-80">国家央企联合打造健康白酒品牌</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-3');
+                nav.classList.add('shadow-xl');
+            } else {
+                nav.classList.add('py-3');
+                nav.classList.remove('py-2');
+                nav.classList.remove('shadow-xl');
+            }
+        });
+    </script>
+</body>
+</html>

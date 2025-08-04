@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人物标签 - Toby/嬋娟</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pink: {
+                            light: '#FFD1DC',
+                            DEFAULT: '#FFB6C1',
+                            dark: '#FF69B4'
+                        },
+                        purple: {
+                            light: '#E6E6FA',
+                            DEFAULT: '#8A2BE2',
+                            dark: '#6A0DAD'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .gradient-bg {
+                background: linear-gradient(135deg, #8A2BE2 0%, #6A0DAD 100%);
+            }
+            .tag-card {
+                transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+            .tag-card:hover {
+                transform: translateY(-10px) scale(1.02);
+            }
+            .tag-icon {
+                transition: all 0.3s ease;
+            }
+            .tag-card:hover .tag-icon {
+                transform: rotate(10deg) scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-purple-light min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="gradient-bg text-white shadow-lg fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-glass text-2xl text-pink-light"></i>
+                <span class="text-xl font-bold">Toby/嬋娟</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-pink-light transition-colors">首页</a>
+                <a href="personality.html" class="hover:text-pink-light transition-colors">个人特质</a>
+                <a href="career.html" class="hover:text-pink-light transition-colors">职业背景</a>
+                <a href="persona.html" class="hover:text-pink-light transition-colors">人设定位</a>
+                <a href="scripts.html" class="hover:text-pink-light transition-colors">抖音剧本</a>
+                <a href="tags.html" class="hover:text-pink-light transition-colors border-b-2 border-pink">人物标签</a>
+            </div>
+            <button class="md:hidden text-white focus:outline-none" id="menuToggle">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-purple-dark py-4 px-4 shadow-inner">
+            <div class="flex flex-col space-y-3">
+                <a href="index.html" class="hover:text-pink-light transition-colors">首页</a>
+                <a href="personality.html" class="hover:text-pink-light transition-colors">个人特质</a>
+                <a href="career.html" class="hover:text-pink-light transition-colors">职业背景</a>
+                <a href="persona.html" class="hover:text-pink-light transition-colors">人设定位</a>
+                <a href="scripts.html" class="hover:text-pink-light transition-colors">抖音剧本</a>
+                <a href="tags.html" class="hover:text-pink-light transition-colors">人物标签</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部横幅 -->
+    <header class="pt-24 pb-16 gradient-bg text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div>
+                    <h1 class="text-[clamp(1.8rem,4vw,3rem)] font-bold mb-2">人物标签</h1>
+                    <p class="opacity-90">Toby/嬋娟的核心形象标识</p>
+                </div>
+                <a href="index.html" class="mt-6 md:mt-0 bg-white text-purple px-6 py-2 rounded-full font-medium hover:bg-pink-light hover:text-white transition-all shadow-md flex items-center">
+                    <i class="fa fa-arrow-left mr-2"></i> 返回首页
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">
+                人物标签是Toby/嬋娟个人IP的核心标识，能够快速传递她的职业身份、专业领域和个人特质，帮助目标受众形成清晰的认知。
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 标签1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden tag-card">
+                    <div class="p-6">
+                        <div class="flex items-start">
+                            <div class="bg-purple-light p-4 rounded-full mr-4 tag-icon">
+                                <i class="fa fa-building text-purple-dark text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-purple-dark mb-2">央企健康酒推荐官</h3>
+                                <p class="text-gray-600 mb-3">
+                                    （产品背书+职业身份）
+                                </p>
+                                <p class="text-gray-600 text-sm">
+                                    这一标签突出了产品的核心优势——国家央企联合打造，同时结合Toby/嬋娟的零售行业经验，强化了推荐的专业性和可信度。她不仅是产品的推广者，更是优质健康白酒的筛选者和把关人。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-purple-light p-4">
+                        <div class="flex items-center text-purple-dark">
+                            <i class="fa fa-lightbulb-o mr-2"></i>
+                            <span class="text-sm font-medium">传递核心价值：权威、可靠、专业</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 标签2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden tag-card">
+                    <div class="p-6">
+                        <div class="flex items-start">
+                            <div class="bg-purple-light p-4 rounded-full mr-4 tag-icon">
+                                <i class="fa fa-shopping-bag text-purple-dark text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-purple-dark mb-2">零售圈靠谱姐姐</h3>
+                                <p class="text-gray-600 mb-3">
+                                    （专业度+亲和力）
+                                </p>
+                                <p class="text-gray-600 text-sm">
+                                    这一标签融合了Toby/嬋娟的职业背景和个人特质，"零售圈"体现了她的专业领域和经验，"靠谱姐姐"则传递出亲和力和可信赖感，拉近与35-70岁目标受众的距离，特别是女性消费者。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-purple-light p-4">
+                        <div class="flex items-center text-purple-dark">
+                            <i class="fa fa-lightbulb-o mr-2"></i>
+                            <span class="text-sm font-medium">传递核心价值：亲和、经验、可信赖</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 标签3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden tag-card">
+                    <div class="p-6">
+                        <div class="flex items-start">
+                            <div class="bg-purple-light p-4 rounded-full mr-4 tag-icon">
+                                <i class="fa fa-language text-purple-dark text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-purple-dark mb-2">健康饮酒翻译官</h3>
+                                <p class="text-gray-600 mb-3">
+                                    （用户痛点+解决方案）
+                                </p>
+                                <p class="text-gray-600 text-sm">
+                                    这一标签突出了Toby/嬋娟的核心功能——将专业的健康白酒知识转化为普通消费者能理解的语言，解决35-70岁人群"想喝白酒又怕不健康"的痛点，为他们提供清晰、实用的健康饮酒指导。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-purple-light p-4">
+                        <div class="flex items-center text-purple-dark">
+                            <i class="fa fa-lightbulb-o mr-2"></i>
+                            <span class="text-sm font-medium">传递核心价值：易懂、实用、解决问题</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 标签4 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden tag-card">
+                    <div class="p-6">
+                        <div class="flex items-start">
+                            <div class="bg-purple-light p-4 rounded-full mr-4 tag-icon">
+                                <i class="fa fa-home text-purple-dark text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-purple-dark mb-2">真实生活分享家</h3>
+                                <p class="text-gray-600 mb-3">
+                                    （个性特质+传播方式）
+                                </p>
+                                <p class="text-gray-600 text-sm">
+                                    这一标签体现了Toby/嬋娟的内容风格——以真实生活场景为载体分享产品体验，而非生硬推销。结合她外向社交的个性特质，通过生活化的内容建立与受众的情感连接，增强信任感和认同感。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-purple-light p-4">
+                        <div class="flex items-center text-purple-dark">
+                            <i class="fa fa-lightbulb-o mr-2"></i>
+                            <span class="text-sm font-medium">传递核心价值：真实、生活化、有温度</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 标签应用建议 -->
+            <div class="mt-12 bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-xl font-bold text-purple-dark mb-6 flex items-center">
+                    <i class="fa fa-tags text-pink mr-2"></i> 标签应用建议
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex">
+                        <div class="bg-pink-light p-2 rounded-full mr-4 mt-1">
+                            <i class="fa fa-video-camera text-purple-dark"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-purple-dark mb-1">视频内容中</h4>
+                            <p class="text-gray-600 text-sm">
+                                在视频开头或结尾自然融入标签，如"我是Toby，你们的健康饮酒翻译官"，强化受众记忆。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex">
+                        <div class="bg-pink-light p-2 rounded-full mr-4 mt-1">
+                            <i class="fa fa-comment text-purple-dark"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-purple-dark mb-1">互动回复中</h4>
+                            <p class="text-gray-600 text-sm">
+                                在回复粉丝评论时，可使用标签自称，如"作为零售圈靠谱姐姐，我建议您..."，增强人设一致性。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex">
+                        <div class="bg-pink-light p-2 rounded-full mr-4 mt-1">
+                            <i class="fa fa-image text-purple-dark"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-purple-dark mb-1">账号资料中</h4>
+                            <p class="text-gray-600 text-sm">
+                                在抖音账号简介中突出核心标签，让新关注的粉丝能快速了解人设定位和价值。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex">
+                        <div class="bg-pink-light p-2 rounded-full mr-4 mt-1">
+                            <i class="fa fa-refresh text-purple-dark"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-purple-dark mb-1">内容规划中</h4>
+                            <p class="text-gray-600 text-sm">
+                                根据不同标签规划内容方向，确保内容覆盖所有核心标签，全面展现人设魅力。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-purple-dark text-white py-10 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa fa-glass text-pink text-2xl"></i>
+                        <span class="text-xl font-bold">Toby/嬋娟</span>
+                    </div>
+                    <p class="mt-2 text-pink-light opacity-80">健康白酒生活家</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p>© 2025 澳门中健昊天</p>
+                    <p class="text-sm mt-1 opacity-80">国家央企联合打造健康白酒品牌</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-2');
+                nav.classList.remove('py-3');
+                nav.classList.add('shadow-xl');
+            } else {
+                nav.classList.add('py-3');
+                nav.classList.remove('py-2');
+                nav.classList.remove('shadow-xl');
+            }
+        });
+    </script>
+</body>
+</html>
