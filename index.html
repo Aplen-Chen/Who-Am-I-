@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王威程澳门餐饮IP定位深度分析报告</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --light-gray: #f5f6fa;
+            --success: #2ecc71;
+            --section-padding: 2rem 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light-gray);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: var(--light-gray);
+            border-radius: 50% 50% 0 0;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--primary);
+            padding: 1rem 0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 2rem 0;
+        }
+        
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .subsection-title {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Cards */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        /* Stats */
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            flex: 1;
+            min-width: 200px;
+            margin: 0.5rem;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Chart */
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 2rem 0;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--light);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -14px;
+        }
+        
+        .right::after {
+            left: -14px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .timeline-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            margin-top: 1rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Images Section */
+        .images-section {
+            margin: 4rem 0 2rem;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .images-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .report-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-height: 400px;
+            object-fit: contain;
+        }
+        
+        .image-caption {
+            text-align: center;
+            margin-top: 0.5rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+            }
+            
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s;
+            }
+            
+            .nav-links.active {
+                max-height: 300px;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+            
+            .images-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .report-image {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>王威程澳门餐饮IP定位深度分析报告</h1>
+            <p>全面解析澳门餐饮市场，助力打造独特餐饮IP</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">餐饮IP定位分析</div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#market-background">市场背景</a></li>
+                <li><a href="#personal-advantages">个人优势</a></li>
+                <li><a href="#audience-analysis">目标受众</a></li>
+                <li><a href="#ip-positioning">IP定位</a></li>
+                <li><a href="#content-planning">内容规划</a></li>
+                <li><a href="#operation-strategy">运营策略</a></li>
+                <li><a href="#development-plan">发展规划</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        <div class="container">
+            <section id="market-background" class="section">
+                <h2 class="section-title">市场背景与IP定位价值</h2>
+                <p>澳门餐饮业正处于一个机遇与挑战并存的关键时期。2025年首季数据显示，澳门饮食业电子支付交易额虽按年微升，但行业分化显著，居民消费意愿减弱，餐饮业整体仍处于"冰封期"。</p>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-number">+17.2%</div>
+                        <div class="stat-label">2025年1月饮食业交易额同比增长</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">+35.7%</div>
+                        <div class="stat-label">西式餐厅交易额增长</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">+22.7%</div>
+                        <div class="stat-label">快餐店交易额增长</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">+22%</div>
+                        <div class="stat-label">中式酒楼饭店交易额增长</div>
+                    </div>
+                </div>
+                
+                <p>在这一背景下，打造一个有特色、有深度的餐饮IP，不仅是个人品牌建设的需要，更是在澳门餐饮市场中脱颖而出的重要策略。王威程作为拥有6年餐饮行业负责人经验的专业人士，具备外向性格、条理性强、适应能力突出等个人优势，以及技术技能和解决问题能力的专业优势，完全有条件在澳门餐饮IP领域打造出独特的个人品牌。</p>
+            </section>
+            
+            <section id="personal-advantages" class="section">
+                <h2 class="section-title">个人特质与优势分析</h2>
+                
+                <h3 class="subsection-title">2.1 性格特质与职业素养</h3>
+                <p>王威程具备鲜明的个人特质，这些特质为其打造独特餐饮IP提供了坚实基础：</p>
+                
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                        <div class="card-title">外向性格</div>
+                        <p>使王威程在镜头前更加自然，易于与观众建立情感连接，这对于打造有温度的餐饮IP至关重要。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-list-check"></i></div>
+                        <div class="card-title">条理性强</div>
+                        <p>能够系统性地规划内容，从选题策划到拍摄制作，都能保持清晰的逻辑，为观众呈现优质内容。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-random"></i></div>
+                        <div class="card-title">适应能力突出</div>
+                        <p>能够快速应对市场变化，灵活调整IP内容策略，确保内容始终与市场需求保持同步。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-chef-hat"></i></div>
+                        <div class="card-title">技术技能突出</div>
+                        <p>技术优势可转化为IP内容的专业性和权威性，如展示烹饪技巧、创新菜品研发等。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-brain"></i></div>
+                        <div class="card-title">解决问题能力</div>
+                        <p>可转化为IP内容的实用价值，如分享餐厅经营经验、解决常见餐饮问题的方法等。</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">2.2 职业背景与专业优势</h3>
+                <p>王威程在餐饮行业6年的负责人经验，为其IP定位提供了丰富的专业资源和行业洞察：</p>
+                
+                <ul>
+                    <li><strong>行业经验积累</strong>：6年的餐饮行业负责人经历，使王威程积累了丰富的行业经验，对澳门餐饮市场有深入了解。</li>
+                    <li><strong>职业目标明确</strong>：希望在澳门餐饮行业有一席之地，这一明确的职业目标可转化为IP内容的主线。</li>
+                    <li><strong>专业知识储备</strong>：拥有全面的餐饮专业知识，包括菜品研发、供应链管理、客户服务等。</li>
+                </ul>
+            </section>
+            
+            <section id="audience-analysis" class="section">
+                <h2 class="section-title">目标受众分析与内容偏好</h2>
+                
+                <h3 class="subsection-title">3.1 目标受众画像</h3>
+                <p>王威程希望覆盖的目标受众是18至60岁的广泛人群，这一群体在餐饮消费和内容消费上有不同的特点：</p>
+                
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-user-astronaut"></i></div>
+                        <div class="card-title">年轻群体(18-35岁)</div>
+                        <p>短视频平台的主力军，更注重内容的娱乐性和互动性。喜欢探店打卡、创意美食和潮流餐饮内容，消费决策容易受社交媒体影响。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-user-tie"></i></div>
+                        <div class="card-title">中年群体(36-60岁)</div>
+                        <p>更注重内容的实用性和专业性，关注健康饮食、传统美食和家庭烹饪技巧。对餐饮IP的信任感建立较慢，但一旦认可则忠诚度较高。</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">3.2 平台内容偏好</h3>
+                <p>不同短视频平台的用户对餐饮内容有不同的偏好，需要针对性制定内容策略：</p>
+                
+                <div class="chart-container">
+                    <canvas id="platformPreferencesChart"></canvas>
+                </div>
+                
+                <ul>
+                    <li><strong>抖音平台</strong>：用户偏好短、快、有趣的内容，喜欢探店视频、美食制作过程和创意吃法。</li>
+                    <li><strong>小红书平台</strong>：用户偏好精致、有质感的图文和视频内容，关注美食的视觉呈现和体验分享。</li>
+                    <li><strong>视频号平台</strong>：用户年龄层相对较广，内容偏好介于抖音和小红书之间，注重实用性和情感共鸣。</li>
+                </ul>
+            </section>
+            
+            <section id="ip-positioning" class="section">
+                <h2 class="section-title">IP核心定位与差异化策略</h2>
+                
+                <h3 class="subsection-title">4.1 核心人设定位</h3>
+                <p>基于王威程的个人特质和职业背景，建议将其IP核心人设定位为：</p>
+                
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-briefcase-medical"></i></div>
+                        <div class="card-title">澳门餐饮实战专家</div>
+                        <p>结合专业背景和技术优势，打造一个既有理论高度又有实战经验的餐饮专家形象。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-user-tie"></i></div>
+                        <div class="card-title">值得信赖的餐饮顾问</div>
+                        <p>通过展示专业知识和解决问题的能力，建立值得信赖的专业形象，成为观众在餐饮领域的可靠顾问。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-hammer"></i></div>
+                        <div class="card-title">脚踏实地的餐饮匠人</div>
+                        <p>强调对餐饮业的坚持和专注，展示其在餐饮行业的奋斗历程和专业追求，传递工匠精神。</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">4.2 差异化竞争策略</h3>
+                <p>在澳门餐饮IP市场中，要脱颖而出需要独特的差异化策略：</p>
+                
+                <ul>
+                    <li><strong>专业深度差异化</strong>：突出专业深度，如分享餐饮管理经验、菜品研发过程、行业趋势分析等专业内容。</li>
+                    <li><strong>实战经验差异化</strong>：强调6年餐饮行业负责人的实战经验，通过真实案例和实战技巧，提供其他IP难以复制的实用价值。</li>
+                    <li><strong>价值观差异化</strong>：传递"坚持"的核心价值观，展示在餐饮行业的坚守和追求，与观众建立情感共鸣和价值认同。</li>
+                </ul>
+            </section>
+            
+            <section id="content-planning" class="section">
+                <h2 class="section-title">内容规划与创作方向</h2>
+                
+                <h3 class="subsection-title">5.1 内容矩阵构建</h3>
+                <p>为全面覆盖目标受众，建议构建"4+X"内容矩阵：</p>
+                
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="card-title">餐饮行业深度解析</div>
+                        <p>分享澳门餐饮行业动态、市场趋势分析、经营策略等专业内容，展示专业知识和行业洞察。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-chess"></i></div>
+                        <div class="card-title">实用餐饮技能教学</div>
+                        <p>教授实用的烹饪技巧、菜品创新方法、餐饮管理技能等，提供实际价值。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-utensils"></i></div>
+                        <div class="card-title">澳门餐饮文化探索</div>
+                        <p>挖掘澳门本地特色餐饮文化、传统美食故事、老字号探访等内容，传递文化价值。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-rocket"></i></div>
+                        <div class="card-title">餐饮创业故事分享</div>
+                        <p>讲述王威程的餐饮创业历程、挑战与突破、成功经验等，传递坚持的价值观和创业精神。</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">5.2 内容形式规划</h3>
+                <p>根据不同平台特点和内容类型，规划多样化的内容形式：</p>
+                
+                <div class="chart-container">
+                    <canvas id="contentFormatsChart"></canvas>
+                </div>
+                
+                <h3 class="subsection-title">5.3 内容发布节奏</h3>
+                <p>合理的发布节奏对于保持IP活跃度和用户粘性至关重要：</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-title">日常内容发布</div>
+                            <p>短视频平台（抖音、视频号）：每周3-5条短视频，保持高频曝光。</p>
+                            <p>小红书平台：每周2-3篇图文或短视频，注重内容质量和深度。</p>
+                            <p>微信公众号：每周1-2篇深度文章，提供系统性知识。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-title">主题系列发布</div>
+                            <p>每月策划1-2个主题系列，如"澳门美食文化探秘"、"餐饮经营实战技巧"等，形成内容矩阵和连贯性。</p>
+                            <p>每个主题系列包含5-8个相关内容，通过不同角度深入探讨同一主题。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-title">大事件专题发布</div>
+                            <p>结合澳门餐饮行业重要事件（如美食节、米其林指南发布等），制作专题内容。</p>
+                            <p>重大节日和活动期间，推出特别策划内容，增强时效性和话题性。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="operation-strategy" class="section">
+                <h2 class="section-title">平台运营与推广策略</h2>
+                
+                <h3 class="subsection-title">7.1 多平台差异化运营</h3>
+                <p>针对不同平台特点，实施差异化运营策略：</p>
+                
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-icon"><i class="fab fa-tiktok"></i></div>
+                        <div class="card-title">抖音平台</div>
+                        <p>注重短视频制作的节奏感和视觉冲击力，前3秒必须抓住观众注意力。内容侧重实用技巧、行业揭秘和热点话题。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fab fa-xing"></i></div>
+                        <div class="card-title">小红书平台</div>
+                        <p>注重内容的视觉呈现和文案质量，强调专业性和精致感。内容侧重深度解析、行业洞察和文化探索。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fab fa-weixin"></i></div>
+                        <div class="card-title">视频号平台</div>
+                        <p>内容兼顾专业性和情感性，注重叙事结构和故事性。利用视频号与微信生态的整合优势，引导用户进入私域流量池。</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">7.2 矩阵账号布局</h3>
+                <p>建立多账号矩阵，扩大影响力和覆盖范围：</p>
+                
+                <ul>
+                    <li><strong>主账号定位</strong>：王威程，定位为专业餐饮专家，发布高质量、深度的专业内容，建立权威形象。</li>
+                    <li><strong>子账号布局</strong>：行业洞察账号、技能教学账号、文化探索账号、生活记录账号。</li>
+                    <li><strong>矩阵协同策略</strong>：各账号内容相互支持、交叉推广，形成内容生态。重大活动和主题系列统一行动，形成矩阵效应。</li>
+                </ul>
+            </section>
+            
+            <section id="development-plan" class="section">
+                <h2 class="section-title">发展规划与风险评估</h2>
+                
+                <h3 class="subsection-title">8.1 阶段性发展规划</h3>
+                <p>为确保IP持续发展，制定阶段性发展规划：</p>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-number">0-6个月</div>
+                        <div class="stat-label">起步期</div>
+                        <p>完成IP核心定位和内容体系构建，建立基础粉丝群体，各平台粉丝总量达到10万+</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">6-18个月</div>
+                        <div class="stat-label">成长期</div>
+                        <p>扩大内容矩阵和平台覆盖，各平台粉丝总量达到50万+，开始商业变现</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">18-36个月</div>
+                        <div class="stat-label">成熟期</div>
+                        <p>形成完整的IP生态系统，各平台粉丝总量达到100万+，成为澳门餐饮领域的知名IP</p>
+                    </div>
+                </div>
+                
+                <h3 class="subsection-title">8.2 风险评估与应对策略</h3>
+                <p>识别潜在风险并制定应对策略，确保IP稳健发展：</p>
+                
+                <div class="card-container">
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                        <div class="card-title">内容风险</div>
+                        <p>风险：内容同质化、创意枯竭、专业度不足</p>
+                        <p>应对：建立内容审核机制、储备内容选题库、持续学习和提升专业能力</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-server"></i></div>
+                        <div class="card-title">平台风险</div>
+                        <p>风险：平台政策变化、算法调整、流量波动</p>
+                        <p>应对：多平台布局、建立私域流量池、关注平台政策动态</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+                        <div class="card-title">信任风险</div>
+                        <p>风险：专业形象受损、负面评价、信任危机</p>
+                        <p>应对：建立透明真实的内容策略、及时回应负面反馈、保持专业和诚信</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 新增的图片展示部分 -->
+            <section class="images-section">
+                <h2 class="section-title">联系我们,开启您的定制之旅</h2>
+                <div class="images-container">
+                    <div class="image-wrapper">
+                        <img src="https://p9-bot-workflow-sign.byteimg.com/tos-cn-i-mdko3gqilj/ab9ac614600b4d6bab5ce6099b5cd945.jpg~tplv-mdko3gqilj-image.image?rk3s=81d4c505&x-expires=1786176241&x-signature=TOlUkuLzyvvrbn3DXWJUxsQjzrs%3D&x-wf-file_name=%E5%85%AC%E5%9F%9F.jpg" 
+                             alt="澳门餐饮市场分析图" 
+                             class="report-image">
+                        <p class="image-caption">公域</p>
+                    </div>
+                    <div class="image-wrapper">
+                        <img src="https://p3-bot-workflow-sign.byteimg.com/tos-cn-i-mdko3gqilj/522ab5e32bf54ba0b2ccc9cc78470cd9.jpg~tplv-mdko3gqilj-image.image?rk3s=81d4c505&x-expires=1786176244&x-signature=EZ2mHPBdJ7gK7Oka9%2B87jX5ClZE%3D&x-wf-file_name=a0d9b4d4a5963de6a5b98c77cde476c.jpg" 
+                             alt="澳门特色餐饮场景" 
+                             class="report-image">
+                        <p class="image-caption">私域</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">王威程澳门餐饮IP定位分析</div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="copyright">© 2025 独角兽*澳门餐饮IP定位深度分析报告. 保留所有权利。</div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Platform preferences chart
+        const ctx1 = document.getElementById('platformPreferencesChart').getContext('2d');
+        const platformPreferencesChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['抖音', '小红书', '视频号'],
+                datasets: [{
+                    label: '娱乐性',
+                    data: [90, 60, 75],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }, {
+                    label: '实用性',
+                    data: [70, 85, 90],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }, {
+                    label: '专业性',
+                    data: [65, 90, 80],
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: '偏好程度'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: '平台'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: '各平台内容偏好对比'
+                    }
+                }
+            }
+        });
+        
+        // Content formats chart
+        const ctx2 = document.getElementById('contentFormatsChart').getContext('2d');
+        const contentFormatsChart = new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['短视频', '长视频', '图文内容', '直播互动'],
+                datasets: [{
+                    data: [45, 20, 25, 10],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                    },
+                    title: {
+                        display: true,
+                        text: '内容形式分布'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
